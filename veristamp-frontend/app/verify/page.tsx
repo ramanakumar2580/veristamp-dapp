@@ -11,8 +11,6 @@ import {
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
 import toast from "react-hot-toast";
-
-// Ensure this path is correct for your project
 import { contractAddress, contractAbi } from "../../lib/veristamp";
 import { config } from "../../app/providers";
 
@@ -217,8 +215,20 @@ export default function VerifyPage() {
           </div>
           {fileHash && (
             <div className="flex items-start gap-4">
-              <div className="flex-shrink-0 h-10 w-10 flex items-center justify-center rounded-full border-2 border-gray-600 text-gray-400">
-                2
+              {/* --- THIS IS THE FIX --- */}
+              <div
+                className={`flex-shrink-0 h-10 w-10 flex items-center justify-center rounded-full border-2 transition-colors ${
+                  verificationResult && typeof verificationResult === "object"
+                    ? "bg-green-500/20 border-green-500 text-green-400"
+                    : "border-gray-600 text-gray-400"
+                }`}
+              >
+                {verificationResult &&
+                typeof verificationResult === "object" ? (
+                  <CheckCircleIcon className="h-6 w-6" />
+                ) : (
+                  "2"
+                )}
               </div>
               <div>
                 <h3 className="font-bold text-lg text-white">
